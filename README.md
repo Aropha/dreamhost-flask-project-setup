@@ -43,9 +43,62 @@ After logged into the server via SSH, run the below command one by one to instal
 [server]$ . ~/.bash_profile
 ```
 The last two commands set this version of Python as the default for the user, and then reload the file to activate it.
+
+Now it is the time to check if the wanted version of Python3 as well as the pip3 are successfully installed. To do that, run the commands:
+
+```
+[server]$ which python3
+/home/username/opt/python-3.9.2/bin/python3
+```
+```
+[server]$ python3 --version
+Python 3.9.2
+```
+```
+[server]$ pip3 --version
+pip 21.2.4 from /home/username/opt/python-3.9.2/lib/python3.9/site-packages/pip (python 3.9)    
+```
+
 Now we can delete the temporary folder `py3_tmp` using the command below:
 ```
 [server]$ cd ~
 [server]$ rm -r py3_tmp
 ```
 
+Please also check the DreamHost documentation for more information: https://help.dreamhost.com/hc/en-us/articles/115000702772-Installing-a-custom-version-of-Python-3
+
+## Install a virtual environment
+To install Flask and any other libraries, a virtual environment may be installed first so that these packages will be isolated from the rest of the applications on the server.
+To do that, we use pip3 that we just installed together with the Python3 in above steps. Before that, pip3 may be upgraded to the newest version first:
+```
+[server]$ python3 -m pip install --upgrade pip
+```
+Once upgraded, install virtualenv using pip3:
+```
+[server]$ pip3 install virtualenv
+```
+then check it:
+```
+[server]$ which virtualenv
+```
+Create the venv itself (change the `username` to your actual uername): 
+```
+virtualenv -p /home/username/opt/python-3.9.2/bin/python3 venv
+```
+Activate your venv: 
+```
+[server]$ source venv/bin/activate
+```
+Now the name of the current virtual environment appears to the left of the prompt, for example:
+```
+(venv) [server]$ 
+```
+To verify the installation again:
+```
+[server]$ python -V
+Python 3.9.2
+```
+
+For more information, check the DreamHost documentation at https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3.
+
+## Install Flask and other Python libraries
