@@ -173,5 +173,23 @@ if __name__ == '__main__':
     app.run()
 ```
 
+Create another file called `__init__.py` also in the folder `app`, and add the following content:
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+from app import routes
+```
+
 ## Create other related app functions and HTML pages
 Above contents can very well guide you to establish a very basic Flask application on DreamHost. You can add more functions or webpages to your site based on your own needs. 
+
+## References
+https://help.dreamhost.com/hc/en-us/articles/216385637-How-do-I-enable-Passenger-on-my-domain-
+https://help.dreamhost.com/hc/en-us/articles/215360828-SSH-client-software
+https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview
+https://help.dreamhost.com/hc/en-us/articles/115000702772-Installing-a-custom-version-of-Python-3
+https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3
+https://www.brettsbeta.com/blog/2020/07/flask-on-dreamhost-shared-website-hosting/
+https://github.com/jprusik/dreamhost-flask-project-template
