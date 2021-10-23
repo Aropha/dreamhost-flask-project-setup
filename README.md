@@ -95,10 +95,83 @@ Now the name of the current virtual environment appears to the left of the promp
 ```
 To verify the installation again:
 ```
-[server]$ python -V
+(venv) [server]$ python -V
 Python 3.9.2
 ```
 
 For more information, check the DreamHost documentation at https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3.
 
 ## Install Flask and other Python libraries
+Make sure the pip3 is upgraded to the newest version, and the correct virtual environment (in this case, the `venv`) is activated:
+```
+[server]$ python3 -m pip install --upgrade pip
+[server]$ source venv/bin/activate
+```
+Now you can install flask into the virtual environment:
+```
+(venv) [server]$ pip install Flask
+```
+or other libraries (e.g., numpy and pandas):
+```
+(venv) [server]$ pip install numpy
+(venv) [server]$ pip install pandas
+```
+
+## Configure Passenger
+Create a Passenger configuration file (this should be in your home directory in the `example.com`):
+```
+(venv) [server]$ nano passenger_wsgi.py
+```
+Then enter the following contents in to the `passenger_wsgi.py` file:
+```
+import sys, os
+# INTERP = os.path.join(os.environ['HOME'], 'example.com', 'venv', 'bin', 'python3')
+INTERP = os.path.expanduser("~/venv/bin/python3")
+if sys.executable != INTERP:
+    os.execl(INTERP, INTERP, *sys.argv)
+sys.path.append(os.getcwd())
+sys.path.append('~/example.com/app')
+from app.app import app as application
+
+if __name__ == '__main__':
+    application.run(debug=False)
+
+```
+Save and close the file, and make it executable:
+```
+(venv) [server]$ chmod +x passenger_wsgi.py
+```
+
+Because every change in the website requires a restart to reflect the change, here we create a folder `tmp` with a file `restart.txt` as the restart button:
+```
+(venv) [server]$ cd ~
+(venv) [server]$ mkdir tmp
+(venv) [server]$ touch tmp/restart.txt
+```
+
+## Create the Flask app
+Create a folder called `app` in your domain folder (make sure to navigate to the correct directory before doing so):
+```
+(venv) [server]$ cd /home/username/example.com
+(venv) [server]$ mkdir app
+```
+Create the major app file commonly called `routes.py` or `app.py` in the folder `app`, and add following contents (the `index.html` is the home page of your site):
+```
+from app import app
+
+app = Flask(__name__)
+
+#default page of our web-app
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+#Starting the Flask Server 
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
+```
+
+## Create other related app functions and HTML pages
+Above contents can very well guide you to establish a very basic Flask application on DreamHost. You can add more functions or webpages to your site based on your own needs. 
