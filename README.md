@@ -28,7 +28,7 @@ The `username` and `password` can be easily found in the **DreamHost Panel** - *
 The `server` in the second option varies depending on the plan you have with DreamHost. More information can be found in the DreamHost documentation https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview. To make it easier, we recommand using the first option whenever possible.
 
 ### Python3 installation
-After logged into the server via SSH, run the below command one by one to install a custom version of Python3. Below example installs Python 3.9.2. You can change this based on your own needs.
+- After logged into the server via SSH, run the below command one by one to install a custom version of Python3. Below example installs Python 3.9.2. You can change this based on your own needs.
 ```
 [server]$ cd ~
 [server]$ mkdir py3_tmp
@@ -44,8 +44,7 @@ After logged into the server via SSH, run the below command one by one to instal
 ```
 The last two commands set this version of Python as the default for the user, and then reload the file to activate it.
 
-Now it is the time to check if the wanted version of Python3 as well as the pip3 are successfully installed. To do that, run the commands:
-
+- Now it is the time to check if the wanted version of Python3 as well as the pip3 are successfully installed. To do that, run the commands:
 ```
 [server]$ which python3
 /home/username/opt/python-3.9.2/bin/python3
@@ -59,7 +58,7 @@ Python 3.9.2
 pip 21.2.4 from /home/username/opt/python-3.9.2/lib/python3.9/site-packages/pip (python 3.9)    
 ```
 
-Now we can delete the temporary folder `py3_tmp` using the command below:
+- Now we can delete the temporary folder `py3_tmp` using the command below:
 ```
 [server]$ cd ~
 [server]$ rm -r py3_tmp
@@ -69,23 +68,23 @@ Please also check the DreamHost documentation for more information: https://help
 
 ## Install a virtual environment
 To install Flask and any other libraries, a virtual environment may be installed first so that these packages will be isolated from the rest of the applications on the server.
-To do that, we use pip3 that we just installed together with the Python3 in above steps. Before that, pip3 may be upgraded to the newest version first:
+- To do that, we use pip3 that we just installed together with the Python3 in above steps. Before that, pip3 may be upgraded to the newest version first:
 ```
 [server]$ python3 -m pip install --upgrade pip
 ```
-Once upgraded, install virtualenv using pip3:
+- Once upgraded, install virtualenv using pip3:
 ```
 [server]$ pip3 install virtualenv
 ```
-then check it:
+- then check it:
 ```
 [server]$ which virtualenv
 ```
-Create the venv itself (change the `username` to your actual uername): 
+- Create the venv itself (change the `username` to your actual uername): 
 ```
 virtualenv -p /home/username/opt/python-3.9.2/bin/python3 venv
 ```
-Activate your venv: 
+- Activate your venv: 
 ```
 [server]$ source venv/bin/activate
 ```
@@ -93,7 +92,7 @@ Now the name of the current virtual environment appears to the left of the promp
 ```
 (venv) [server]$ 
 ```
-To verify the installation again:
+- To verify the installation again:
 ```
 (venv) [server]$ python -V
 Python 3.9.2
@@ -102,12 +101,12 @@ Python 3.9.2
 For more information, check the DreamHost documentation at https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3.
 
 ## Install Flask and other Python libraries
-Make sure the pip3 is upgraded to the newest version, and the correct virtual environment (in this case, the `venv`) is activated:
+- Make sure the pip3 is upgraded to the newest version, and the correct virtual environment (in this case, the `venv`) is activated:
 ```
 [server]$ python3 -m pip install --upgrade pip
 [server]$ source venv/bin/activate
 ```
-Now you can install flask into the virtual environment:
+- Now you can install flask into the virtual environment:
 ```
 (venv) [server]$ pip install Flask
 ```
@@ -118,11 +117,11 @@ or other libraries (e.g., numpy and pandas):
 ```
 
 ## Configure Passenger
-Create a Passenger configuration file (this should be in your home directory in the `example.com`):
+- Create a Passenger configuration file (this should be in your home directory in the `example.com`):
 ```
 (venv) [server]$ nano passenger_wsgi.py
 ```
-Then enter the following contents in to the `passenger_wsgi.py` file:
+- Then enter the following contents in to the `passenger_wsgi.py` file:
 ```
 import sys, os
 # INTERP = os.path.join(os.environ['HOME'], 'example.com', 'venv', 'bin', 'python3')
@@ -137,12 +136,12 @@ if __name__ == '__main__':
     application.run(debug=False)
 
 ```
-Save and close the file, and make it executable:
+- Save and close the file, and make it executable:
 ```
 (venv) [server]$ chmod +x passenger_wsgi.py
 ```
 
-Because every change in the website requires a restart to reflect the change, here we create a folder `tmp` with a file `restart.txt` as the restart button:
+- Because every change in the website requires a restart to reflect the change, here we create a folder `tmp` with a file `restart.txt` as the restart button:
 ```
 (venv) [server]$ cd ~
 (venv) [server]$ mkdir tmp
@@ -150,12 +149,12 @@ Because every change in the website requires a restart to reflect the change, he
 ```
 
 ## Create the Flask app
-Create a folder called `app` in your domain folder (make sure to navigate to the correct directory before doing so):
+- Create a folder called `app` in your domain folder (make sure to navigate to the correct directory before doing so):
 ```
 (venv) [server]$ cd /home/username/example.com
 (venv) [server]$ mkdir app
 ```
-Create the major app file commonly called `routes.py` or `app.py` in the folder `app`, and add following contents (the `index.html` is the home page of your site):
+- Create the major app file commonly called `routes.py` or `app.py` in the folder `app`, and add following contents (the `index.html` is the home page of your site):
 ```
 from app import app
 
@@ -173,7 +172,7 @@ if __name__ == '__main__':
     app.run()
 ```
 
-Create another file called `__init__.py` also in the folder `app`, and add the following content:
+- Create another file called `__init__.py` also in the folder `app`, and add the following content:
 ```
 from flask import Flask
 
@@ -186,10 +185,10 @@ from app import routes
 Above contents can very well guide you to establish a very basic Flask application on DreamHost. You can add more functions or webpages to your site based on your own needs. 
 
 ## References
-https://help.dreamhost.com/hc/en-us/articles/216385637-How-do-I-enable-Passenger-on-my-domain-
-https://help.dreamhost.com/hc/en-us/articles/215360828-SSH-client-software
-https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview
-https://help.dreamhost.com/hc/en-us/articles/115000702772-Installing-a-custom-version-of-Python-3
-https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3
-https://www.brettsbeta.com/blog/2020/07/flask-on-dreamhost-shared-website-hosting/
-https://github.com/jprusik/dreamhost-flask-project-template
+- https://help.dreamhost.com/hc/en-us/articles/216385637-How-do-I-enable-Passenger-on-my-domain-
+- https://help.dreamhost.com/hc/en-us/articles/215360828-SSH-client-software
+- https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview
+- https://help.dreamhost.com/hc/en-us/articles/115000702772-Installing-a-custom-version-of-Python-3
+- https://help.dreamhost.com/hc/en-us/articles/115000695551-Installing-and-using-virtualenv-with-Python-3
+- https://www.brettsbeta.com/blog/2020/07/flask-on-dreamhost-shared-website-hosting/
+- https://github.com/jprusik/dreamhost-flask-project-template
