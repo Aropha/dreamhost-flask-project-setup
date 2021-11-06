@@ -25,7 +25,7 @@ followed by inputting the password upon pressing "Enter".
 
 The `username` and `password` can be easily found in the **DreamHost Panel** - **Websites** - **FTP Users & Files**.
 
-The `server` in the second option varies depending on the plan you have with DreamHost. More information can be found in the DreamHost documentation https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview. To make it easier, we recommand using the first option whenever possible.
+The `server` in the second option varies depending on the plan you have with DreamHost. More information can be found in the DreamHost documentation https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview. To make it easier, we recommend using the first option whenever possible.
 
 ### Python3 installation
 - After logged into the server via SSH, run the below command one by one to install a custom version of Python3. Below example installs Python 3.9.2. You can change this based on your own needs.
@@ -80,7 +80,7 @@ To install Flask and any other libraries, a virtual environment may be installed
 ```
 [server]$ which virtualenv
 ```
-- Create the venv itself (change the `username` to your actual uername): 
+- Create the venv itself (change the `username` to your actual username): 
 ```
 virtualenv -p /home/username/opt/python-3.9.2/bin/python3 venv
 ```
