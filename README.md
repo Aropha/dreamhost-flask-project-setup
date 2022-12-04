@@ -22,7 +22,7 @@ followed by inputting the password upon pressing "Enter".
 
 The `username` and `password` can be easily found in the **DreamHost Panel** - **Websites** - **FTP Users & Files**.
 
-The `server` in the second option varies depending on the plan you have with DreamHost. More information can be found in the DreamHost documentation https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview. To make it easier, we recommend using the first option whenever possible.
+The `server` in the second option is your host name, like `vps*****.dreamhostps.com`. More information can be found in the DreamHost documentation https://help.dreamhost.com/hc/en-us/articles/216041267-SSH-overview. To make it easier, we recommend using the first option whenever possible.
 
 ## Use existing python (e.g., python3.8)
 - Before having to install a custom version of python, you may want to check whether the system already has one that you can use. To check all the available versions, type `[server]$ python` followed by two tabs. This may give you a few available versions. If you want to use one of it (e.g., python3.8), then type `[server]$ which python3.8`, which will give you the location of this python (e.g., `/usr/bin/python3.8`). To use it, create an environment called venv_new based on this python by `[server]$ virtualenv venv_new -p /usr/bin/python3.8` (assuming the virtualenv is installed already. If not, simply do `[server]$ python3 -m pip install --upgrade pip` and `pip3 install virtualenv` to install it).
